@@ -76,8 +76,8 @@ class KeyChainViewController : UITableViewController{
         
         });
 
-        NotificationCenter.default.addObserver(self, selector: #selector(KeyChainViewController.viewInForeground), name:NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(KeyChainViewController.viewInBackground), name:NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(KeyChainViewController.viewInForeground), name:UIApplication.willEnterForegroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(KeyChainViewController.viewInBackground), name:UIApplication.didEnterBackgroundNotification, object: nil)
         
 
     }

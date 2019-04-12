@@ -16,10 +16,11 @@ target 'SdkSample' do
     ##
     # 2. Step
     # Add the 'TapkeyMobileLib' as dependency to the target app
-    pod 'TapkeyMobileLib', '1.15.8.0'
+    pod 'TapkeyMobileLib', '1.15.12.0'
+
     #
     ##
     
-    pod 'Auth0', '1.12.0'
+    pod 'Auth0', '1.14.2'
     
 end
