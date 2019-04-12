@@ -30,10 +30,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TapkeyAppDelegate {
         self.tapkeyServiceFactory = TapkeyServiceFactoryBuilder()
             
             // Change the backend URI if required.
-            .setServiceBaseUri(serviceBaseUri: "https://example.com")
+            //.setServiceBaseUri(serviceBaseUri: "https://example.com")
             
             //Change the tenant if required.
-            .setTenantId(tenantId: "someTenant")
+            //.setTenantId(tenantId: "someTenant")
             
             .build();
         
