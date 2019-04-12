@@ -161,6 +161,7 @@
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				en,
 				Base,
 			);
 			mainGroup = G_28A9FB5A587A15C259759CEEDC2C09C3;
@@ -313,7 +314,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = net.tpky.SDKSample;
 				PROVISIONING_PROFILE_SPECIFIER = "iOS Development Provisioning Profile";
 				SDKROOT = iphoneos;
-				SWIFT_VERSION = 4.1;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -333,7 +334,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = net.tpky.SDKSample;
 				PROVISIONING_PROFILE_SPECIFIER = "iOS AppStore Distribution Provisioning Profile";
 				SDKROOT = iphoneos;
-				SWIFT_VERSION = 4.1;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

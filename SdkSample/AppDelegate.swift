@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TapkeyAppDelegate {
     fileprivate var tapkeyIdentityProivder:Auth0PasswordIdentityProvider!;
 
     func application(_ application: UIApplication,
-                     willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
+                     willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         
         // Build service factory singleton instance
         self.tapkeyServiceFactory = TapkeyServiceFactoryBuilder()
@@ -65,7 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TapkeyAppDelegate {
 
     }
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
         return true

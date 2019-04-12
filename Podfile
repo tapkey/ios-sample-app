@@ -20,6 +20,6 @@ target 'SdkSample' do
     #
     ##
     
-    pod 'Auth0', '1.12.0'
+    pod 'Auth0', '1.14.2'
     
 end
