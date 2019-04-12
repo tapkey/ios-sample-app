@@ -218,7 +218,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-SdkSample/Pods-SdkSample-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-SdkSample/Pods-SdkSample-resources.sh",
 				"${PODS_ROOT}/TapkeyMobileLib/TapkeyMobileLib.framework/TapkeyMobileLib.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -229,7 +229,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SdkSample/Pods-SdkSample-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SdkSample/Pods-SdkSample-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		99C9B2FC8B16B96AD0935F12 /* [CP] Embed Pods Frameworks */ = {
@@ -240,7 +240,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-SdkSample/Pods-SdkSample-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-SdkSample/Pods-SdkSample-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Auth0/Auth0.framework",
 				"${BUILT_PRODUCTS_DIR}/SimpleKeychain/SimpleKeychain.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftWebSocket/SwiftWebSocket.framework",
@@ -255,7 +255,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SdkSample/Pods-SdkSample-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SdkSample/Pods-SdkSample-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
