@@ -2,6 +2,25 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+	<key>sample_backend_host</key>
+	<string>$(SAMPLE_BACKEND_HOST)</string>
+	<key>sample_backend_port</key>
+	<string>$(SAMPLE_BACKEND_PORT)</string>
+	<key>sample_backend_scheme</key>
+	<string>$(SAMPLE_BACKEND_SCHEME)</string>
+	<key>tapkey_authorization_server_scheme</key>
+	<string>$(TAPKEY_AUTHORIZATION_SERVER_SCHEME)</string>
+	<key>tapkey_authorization_server_authority</key>
+	<string>$(TAPKEY_AUTHORIZATION_SERVER_AUTHORITY)</string>
+	<key>tapkey_oauth_client_id</key>
+	<string>$(TAPKEY_OAUTH_CLIENT_ID)</string>
+	<key>tapkey_identity_provider_id</key>
+	<string>$(TAPKEY_IDENTITY_PROVIDER_ID)</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>

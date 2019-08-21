@@ -1,216 +1,249 @@
-/* /////////////////////////////////////////////////////////////////////////////////////////////////
- //                          Copyright (c) Tapkey GmbH
- //
- //         All rights are reserved. Reproduction in whole or in part is
- //        prohibited without the written consent of the copyright owner.
- //    Tapkey reserves the right to make changes without notice at any time.
- //   Tapkey makes no warranty, expressed, implied or statutory, including but
- //   not limited to any implied warranty of merchantability or fitness for any
- //  particular purpose, or that the use will not infringe any third party patent,
- //   copyright or trademark. Tapkey must not be liable for any loss or damage
- //                            arising from its use.
- ///////////////////////////////////////////////////////////////////////////////////////////////// */
-
-
-import Foundation
-import UIKit
 import TapkeyMobileLib
+import UIKit
+import RxSwift
 
-class KeyChainViewController : UITableViewController{
-    
-    var keyManager: TkKeyManager?;
-    var userManager: TkUserManager?;
-    var bleLockManager: TkBleLockManager?;
-    var commandExecutionFacade: TkCommandExecutionFacade?;
-    var configManager: TkConfigManager?;
-    
-    var observer: TkObserver<Void>?;
-    var keyObserverRegistration: TkObserverRegistration?;
-    
-    var bluetoothObserver: TkObserver<AnyObject>?;
-    var bluetoothObserverRegistration: TkObserverRegistration?;
-    
-    var bluetoothStateObserver: TkObserver<NetTpkyMcModelBluetoothState>?;
-    var bluetoothStateObserverRegistration: TkObserverRegistration?;
-    
-    var scanInProgress: Bool = false;
-    var keys: [NetTpkyMcModelWebviewCachedKeyInformation] = [];
+class KeyChainViewController: UITableViewController {
 
-    
+    var keyManager: TKMKeyManager!
+    var userManager: TKMUserManager!
+    var bleLockScanner: TKMBleLockScanner!
+    var bleLockCommunicator: TKMBleLockCommunicator!
+    var commandExecutionFacade: TKMCommandExecutionFacade!
+
+    var keyObserverRegistration: TKMObserverRegistration?
+    var bluetoothObserverRegistration: TKMObserverRegistration?
+    var scanRegistration: TKMObserverRegistration?
+
+    var sampleServerManager: SampleServerManager!
+
+    var listItems: [(TKMKeyDetails, ApplicationGrant)] = []
+
     override func viewDidLoad() {
-     
-        let app:AppDelegate = UIApplication.shared.delegate as! AppDelegate;
-        let tapkeyServiceFactory:TapkeyServiceFactory = app.getTapkeyServiceFactory();
-        self.keyManager = tapkeyServiceFactory.getKeyManager();
-        self.userManager = tapkeyServiceFactory.getUserManager();
-        self.bleLockManager = tapkeyServiceFactory.getBleLockManager();
-        self.commandExecutionFacade = tapkeyServiceFactory.getCommandExecutionFacade();
-        self.configManager = tapkeyServiceFactory.getConfigManager();
-        
-        self.observer = TkObserver({ (aVoid:Void?) in self.reloadLocalKeys() })
-        self.bluetoothObserver = TkObserver({ (any:AnyObject?) in self.refreshView(); });
-        self.bluetoothStateObserver = TkObserver({ (newBluetoothState: NetTpkyMcModelBluetoothState?) in
-        
-            let bluetoothState:NetTpkyMcModelBluetoothState = newBluetoothState ?? NetTpkyMcModelBluetoothState.no_BLE();
-            
-            /*
-             * When bluetooth is enabled and scan not in progress yet, start scan
-             */
-            if (!self.scanInProgress && bluetoothState == NetTpkyMcModelBluetoothState.bluetooth_ENABLED()){
-                
-                self.scanInProgress = true;
-                self.bleLockManager!.startForegroundScan();
-                
-            /*
-             * Whe bluetooth is not enabled and scan in progress, stop scan
-             */
-            } else if (self.scanInProgress && bluetoothState != NetTpkyMcModelBluetoothState.bluetooth_ENABLED()){
-                
-                self.bleLockManager!.stopForegroundScan();
-                self.scanInProgress = false;
-                
-            }
-            
-            self.refreshView();
+        let app: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+        let tapkeyServiceFactory: TKMServiceFactory = app.getTapkeyServiceFactory()
+        self.keyManager = tapkeyServiceFactory.keyManager
+        self.userManager = tapkeyServiceFactory.userManager
+        self.bleLockScanner = tapkeyServiceFactory.bleLockScanner
+        self.bleLockCommunicator = tapkeyServiceFactory.bleLockCommunicator
+        self.commandExecutionFacade = tapkeyServiceFactory.commandExecutionFacade
 
-        
-        });
+        self.sampleServerManager = SampleServerManager()
 
-        NotificationCenter.default.addObserver(self, selector: #selector(KeyChainViewController.viewInForeground), name:UIApplication.willEnterForegroundNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(KeyChainViewController.viewInBackground), name:UIApplication.didEnterBackgroundNotification, object: nil)
-        
-
+        NotificationCenter.default.addObserver(self, selector: #selector(KeyChainViewController.viewInForeground),
+                name: UIApplication.willEnterForegroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(KeyChainViewController.viewInBackground),
+                name: UIApplication.didEnterBackgroundNotification, object: nil)
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
-        self.viewInForeground();
+        self.viewInForeground()
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
-        self.viewInBackground();
+        self.viewInBackground()
     }
-    
+
     @objc private func viewInForeground() {
-        
-        if(self.keyObserverRegistration == nil){
-            self.keyObserverRegistration = self.keyManager!.getKeyUpdateObserveable().addObserver(self.observer!);
-        }
-        
-        if(self.bluetoothObserverRegistration == nil){
-            self.bluetoothObserverRegistration = self.bleLockManager!.getLocksChangedObservable().addObserver(self.bluetoothObserver!);
-        }
-        
-        if(self.bluetoothStateObserverRegistration == nil){
-            self.bluetoothStateObserverRegistration = self.configManager!.observerBluetoothState().addObserver(self.bluetoothStateObserver!);
+
+        if self.keyObserverRegistration == nil {
+            self.keyObserverRegistration = self.keyManager?.keyUpdateObservable.addObserver({ _ in
+                self.reloadLocalKeys()
+            })
         }
 
-        // Start scan, if not in progress and bluetooth is enabled
-        if(!self.scanInProgress){
-            if(self.configManager?.getBluetoothState() == NetTpkyMcModelBluetoothState.bluetooth_ENABLED()){
-                self.scanInProgress = true;
-                self.bleLockManager!.startForegroundScan();
-            }
+        if self.bluetoothObserverRegistration == nil {
+            self.bluetoothObserverRegistration = self.bleLockScanner.observable.addObserver({ _ in
+                self.refreshView()
+            })
         }
-        
-        reloadLocalKeys();
+
+        // Start scan, if not already in progress
+        if self.scanRegistration == nil {
+            self.scanRegistration = self.bleLockScanner!.startForegroundScan()
+        }
+
+        reloadLocalKeys()
     }
-    
+
     @objc private func viewInBackground() {
 
-        
-        
-        if(self.keyObserverRegistration != nil){
-            keyObserverRegistration!.close();
-            keyObserverRegistration = nil;
-        }
-        
-        if(self.bluetoothObserverRegistration != nil){
-            self.bluetoothObserverRegistration!.close();
-            self.bluetoothObserverRegistration = nil;
-        }
-        
-        if(self.bluetoothStateObserverRegistration != nil){
-            self.bluetoothStateObserverRegistration!.close();
-            self.bluetoothStateObserverRegistration = nil;
+        if self.keyObserverRegistration != nil {
+            keyObserverRegistration!.close()
+            keyObserverRegistration = nil
         }
 
-        if(self.scanInProgress){
-            self.bleLockManager!.stopForegroundScan();
-            self.scanInProgress = false;
+        if self.bluetoothObserverRegistration != nil {
+            self.bluetoothObserverRegistration!.close()
+            self.bluetoothObserverRegistration = nil
+        }
+
+        if self.scanRegistration != nil {
+            self.scanRegistration!.close()
+            self.scanRegistration = nil
         }
     }
-    
-    
-    
-    private func reloadLocalKeys() {
-        
-        // We only support a single user today, so the first user is the only user.
-        guard let user = self.userManager!.getFirstUser() else {
-            NSLog("No User is signed in")
-            return;
-        }
-        
-        self.keyManager!.queryLocalKeysAsync(user: user, forceUpdate: false, cancellationToken: TkCancellationToken_None)
-            .continueOnUi { (keys: [NetTpkyMcModelWebviewCachedKeyInformation]?) -> Void in
-                
-                self.keys = keys ?? [];
-                self.refreshView();
-                
-            }.catchOnUi { (e:NSException?) in
 
-                NSLog("Query local keys failed. \(String(describing: e?.reason))");
-                
-            }.conclude();
+    private func reloadLocalKeys() {
+
+        // This sample app assumes only one user is logged in at a time
+        if self.userManager.users.count < 1 {
+            NSLog("No User is signed in")
+            return
+        }
+        let userId = self.userManager.users[0]
+
+        self.keyManager!.queryLocalKeysAsync(
+                        userId: userId,
+                        forceUpdate: false,
+                        cancellationToken: TKMCancellationTokens.None)
+            .continueOnUi { keyDetails in
+
+                guard let keys = keyDetails, keys.count > 0 else {
+                    NSLog("No local keys available")
+                    self.listItems = []
+                    self.refreshView()
+                    return
+                }
+
+                _ = self.getApplicationGrantsForKeyDetails(keyDetails: keys)
+                        .subscribe(onNext: { (keysWithGrants) in
+                            self.listItems = keysWithGrants
+                            self.refreshView()
+                        }, onError: { (error) in
+                            NSLog("""
+                                  Error while retrieving application grants for local keys:
+                                   \(String(describing: error))
+                                  """)
+                            self.listItems = []
+                            self.refreshView()
+                        })
+
+            }.catchOnUi { (error: NSException?) in
+                NSLog("Query local keys failed. \(String(describing: error?.reason))")
+                self.listItems = []
+                self.refreshView()
+                return nil
+            }.conclude()
     }
 
     private func refreshView() {
-        NSLog("Refresh view");
-        self.tableView.reloadData();
+        NSLog("Refresh view")
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
-    
-    private func triggerLock(physicalLockId: String) -> TkPromise<Bool> {
-        return self.bleLockManager!.executeCommandAsync(deviceIds: [], physicalLockId: physicalLockId, commandFunc: { (tlcConnection: NetTpkyMcTlcpTlcpConnection?) -> TkPromise<NetTpkyMcModelCommandResult> in
-            return self.commandExecutionFacade!.triggerLockAsync(tlcConnection, cancellationToken: TkCancellationToken_None)
-        }, cancellationToken: TkCancellationToken_None)
-        .continueOnUi({ (commandResult: NetTpkyMcModelCommandResult?) -> Bool in
-                
-            let code: NetTpkyMcModelCommandResult_CommandResultCode = commandResult?.getCode() ?? NetTpkyMcModelCommandResult_CommandResultCode.technicalError();
-            
-            switch(code) {
-                    
-                case NetTpkyMcModelCommandResult_CommandResultCode.ok():
-                    return true;
-                    
+
+    /**
+     * Retrieves grants for the given local keys from the sample server. These domain-specific grants contain additional
+     * metadata about the grant.
+     */
+    private func getApplicationGrantsForKeyDetails(
+            keyDetails: [TKMKeyDetails]) -> Observable<[(TKMKeyDetails, ApplicationGrant)]> {
+
+        if let username = SampleAuthStateManager.getUsername(), let password = SampleAuthStateManager.getPassword() {
+            let grantIds = keyDetails.map({ (keyDetails) -> String in keyDetails.grantId })
+            return self.sampleServerManager.getGrants(username: username, password: password, grantIds: grantIds)
+                    .map({ (applicationGrants: [ApplicationGrant]) -> [(TKMKeyDetails, ApplicationGrant)] in
+                        keyDetails.map({ (key) -> (TKMKeyDetails, ApplicationGrant?) in
+                            if let grant = applicationGrants.first(where: { $0.id == key.grantId }) {
+                                return (key, grant)
+                            } else {
+                                return (key, nil)
+                            }
+                        }).compactMap({
+                            guard let grant = $0.1 else {
+                                return nil
+                            }
+                            return ($0.0, grant)
+                        })
+                    })
+        } else {
+            NSLog("Cannot obtain sample server user information during local key reload.")
+            return Observable.error(KeyChainError.notAuthenticatedDuringKeyReload)
+        }
+    }
+
+    /**
+     * This method contains the core logic for triggering a Tapkey lock. It takes a lock's physical lock ID and returns
+     * a Promise that will resolve once the command has completed successfully, or resolve to an error if not.
+     *
+     * As a first step, the corresponding Bluetooth address is looked up for the given physical lock ID. The BLE lock
+     * scanner provides such functionality.
+     * Afterwards, the BLE lock communicator is used to establish a connection to the lock. The resulting TLCP
+     * connection is then passed to the command execution facade, which will execute the actual trigger lock command.
+     *
+     * Please note that in a production-grade scenario, the implementing application will have to provide proper
+     * cancellation mechanisms and handle errors.
+     *
+     * - Parameters:
+     *    - physicalLockId: The lock's physical lock ID as a Base64-encoded string. More information on this topic can
+     *                      be found here: https://developers.tapkey.io/mobile/concepts/lock_ids/
+     */
+    private func triggerLock(physicalLockId: String) -> TKMPromise<Bool> {
+        guard let bluetoothAddress = self.bleLockScanner.getLock(
+                physicalLockId: physicalLockId)?.bluetoothAddress else {
+            NSLog("Lock not nearby")
+            return TKMAsync.promiseFromResult(false)
+        }
+
+        // Use the BLE lock communicator to send a command to the lock
+        return self.bleLockCommunicator.executeCommandAsync(
+                        bluetoothAddress: bluetoothAddress,
+                        physicalLockId: physicalLockId,
+                        commandFunc: { tlcpConnection in
+                            // Pass the TLCP connection to the command execution facade
+                            self.commandExecutionFacade!.triggerLockAsync(
+                                    tlcpConnection,
+                                    cancellationToken: TKMCancellationTokens.None
+                            )
+                        },
+                        cancellationToken: TKMCancellationTokens.None)
+
+            // Process the command's result
+            .continueOnUi({ commandResult in
+                let code: TKMCommandResult.TKMCommandResultCode = commandResult?.code ??
+                        TKMCommandResult.TKMCommandResultCode.technicalError
+
+                switch code {
+                case TKMCommandResult.TKMCommandResultCode.ok:
+                    return true
                 default:
-                    return false;
-                
-            }
-                
-        })
-        .catchOnUi({ (e:NSException?) -> Bool in
-            NSLog("Trigger lock failed");
-            return false;
-        });
+                    return false
+                }
+            })
+            .catchOnUi({ (_: NSException?) -> Bool in
+                NSLog("Trigger lock failed")
+                return false
+            })
     }
-    
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.keys.count;
+        return self.listItems.count
     }
-    
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell:KeyItemTableCell = tableView.dequeueReusableCell(withIdentifier:"KeyItem", for: indexPath) as! KeyItemTableCell
-        
-        let key = self.keys[indexPath.row]
-        let physicalLockId: String = key.getGrant().getBoundLock().getPhysicalLockId();
-        let isLockNearby:Bool = self.bleLockManager!.isLockNearby(physicalLockId: physicalLockId)
-        
-        cell.setKey(key, nearby: isLockNearby, triggerFn: { () -> TkPromise<Bool> in
-            return self.triggerLock(physicalLockId: physicalLockId);
-        });
-        
+
+        let cell: KeyItemTableCell = tableView.dequeueReusableCell(
+                withIdentifier: "KeyItem",
+                for: indexPath) as! KeyItemTableCell
+        let keyWithGrant = self.listItems[indexPath.row]
+
+        if let physicalLockId: String = keyWithGrant.1.physicalLockId {
+            let isLockNearby: Bool = self.bleLockScanner!.isLockNearby(physicalLockId: physicalLockId)
+            cell.setKey(keyWithGrant, nearby: isLockNearby, triggerFn: { () -> TKMPromise<Bool> in
+                self.triggerLock(physicalLockId: physicalLockId)
+            })
+        } else {
+            cell.setKey(keyWithGrant,
+                    nearby: false,
+                    triggerFn: { () -> TKMPromise<Bool> in TKMAsync.promiseFromResult(false) })
+        }
+
         return cell
     }
 
+    enum KeyChainError: Error {
+        case notAuthenticatedDuringKeyReload
+    }
 
 }
