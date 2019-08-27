@@ -1,6 +1,8 @@
 build/
 DerivedData/
 
+Config.xcconfig
+
 ## Various settings
 *.pbxuser
 !default.pbxuser

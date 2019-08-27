@@ -8,15 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		85F9C30C9B0EB403DD87152C /* Pods_SdkSample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D70CB29EF38162152285C987 /* Pods_SdkSample.framework */; };
-		BF_0954CC5236EF042E6DE9577FDA26538A /* SignInViewCtrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_2BFEA8A4C9973CB960476289B7E93F84 /* SignInViewCtrl.swift */; };
+		9E5B4F86230D5B0B00BE87EB /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5B4F85230D5B0B00BE87EB /* Environment.swift */; };
+		9E5B4F88230D749C00BE87EB /* TapkeyTokenExchangeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5B4F87230D749C00BE87EB /* TapkeyTokenExchangeManager.swift */; };
+		9E5B4F8C230D9A2000BE87EB /* SampleTokenRefreshHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5B4F8B230D9A2000BE87EB /* SampleTokenRefreshHandler.swift */; };
+		9E5B4F8E230DA0BD00BE87EB /* SampleAuthStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5B4F8D230DA0BD00BE87EB /* SampleAuthStateManager.swift */; };
+		9E5B4F90230E760C00BE87EB /* ApplicationGrant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5B4F8F230E760C00BE87EB /* ApplicationGrant.swift */; };
+		9E745FF6230D38F6000E6BE4 /* SampleServerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E745FF5230D38F6000E6BE4 /* SampleServerManager.swift */; };
+		BF_0954CC5236EF042E6DE9577FDA26538A /* LoginViewCtrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_2BFEA8A4C9973CB960476289B7E93F84 /* LoginViewCtrl.swift */; };
 		BF_328F840739F888EBF15860A0813A2CA5 /* KeyItemTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_9C26A0EF5017514A01606640BDA0C125 /* KeyItemTableCell.swift */; };
 		BF_3A614E03ECFFDAF09DBE10C40D64BE20 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FR_D97841911AE60EC4FE70EA1A96BC63D0 /* Assets.xcassets */; };
 		BF_4F467CC1B3445F484696DF68A8900C99 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = VG_065EB0347B63D39DF182FABCACE20D2E /* Main.storyboard */; };
-		BF_5313E33A410514E0619F27AAC53CC758 /* AsyncAuth0Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_A5E3C1E57AA1DD03D467734CBFF03CDB /* AsyncAuth0Client.swift */; };
 		BF_691B4299E895C8CE0398A60CCBD3DCB7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_18B883DD27D70ADF591789D320766E89 /* AppDelegate.swift */; };
 		BF_7891612257AC0B69C19BB04B9E91BC7F /* KeyChainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_2B5526D977B1A100F91A8ADF0B2AC2A4 /* KeyChainViewController.swift */; };
 		BF_8F3B3BB67DFD9EBFC07B8A4210A588DB /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_F1EFC099D57C40E7E77B93F2770DC89F /* TabBarController.swift */; };
-		BF_AF7907A1A1443CD3B1890CA65CB772CA /* Auth0PasswordIdentityProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_A8529147BF167FC95516DCD4ACFB9DA5 /* Auth0PasswordIdentityProvider.swift */; };
 		BF_BA99A79BD3296469C57AD8AA86728371 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = VG_09CBD1252ED91E78E85F119CA3BAE947 /* LaunchScreen.storyboard */; };
 		BF_FF7BEC3C57CD5CB5A91DF0D5D53B685A /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_FF0F434DD7F474EA1BA586E20B667586 /* AboutViewController.swift */; };
 		F5FB9F06221443E200F60099 /* third_party_licenses.txt in Resources */ = {isa = PBXBuildFile; fileRef = F5FB9F05221443E200F60099 /* third_party_licenses.txt */; };
@@ -24,16 +28,24 @@
 
 /* Begin PBXFileReference section */
 		3495A2AD311D6FE3E66B2E68 /* Pods-SdkSample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SdkSample.release.xcconfig"; path = "Pods/Target Support Files/Pods-SdkSample/Pods-SdkSample.release.xcconfig"; sourceTree = "<group>"; };
+		82C834C2C6E380B6A9A6064D /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = file.yml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		8756376990EE410499AB75E1 /* Pods-SdkSample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SdkSample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SdkSample/Pods-SdkSample.debug.xcconfig"; sourceTree = "<group>"; };
+		9E5B4F84230D4A6400BE87EB /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		9E5B4F85230D5B0B00BE87EB /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		9E5B4F87230D749C00BE87EB /* TapkeyTokenExchangeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapkeyTokenExchangeManager.swift; sourceTree = "<group>"; };
+		9E5B4F89230D78CA00BE87EB /* SdkSample.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = SdkSample.debug.xcconfig; sourceTree = "<group>"; };
+		9E5B4F8A230D794400BE87EB /* SdkSample.release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = SdkSample.release.xcconfig; sourceTree = "<group>"; };
+		9E5B4F8B230D9A2000BE87EB /* SampleTokenRefreshHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleTokenRefreshHandler.swift; sourceTree = "<group>"; };
+		9E5B4F8D230DA0BD00BE87EB /* SampleAuthStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleAuthStateManager.swift; sourceTree = "<group>"; };
+		9E5B4F8F230E760C00BE87EB /* ApplicationGrant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationGrant.swift; sourceTree = "<group>"; };
+		9E745FF5230D38F6000E6BE4 /* SampleServerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleServerManager.swift; sourceTree = "<group>"; };
 		D70CB29EF38162152285C987 /* Pods_SdkSample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SdkSample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5FB9F05221443E200F60099 /* third_party_licenses.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = third_party_licenses.txt; sourceTree = SOURCE_ROOT; };
 		FR_18B883DD27D70ADF591789D320766E89 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FR_2B5526D977B1A100F91A8ADF0B2AC2A4 /* KeyChainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainViewController.swift; sourceTree = "<group>"; };
-		FR_2BFEA8A4C9973CB960476289B7E93F84 /* SignInViewCtrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewCtrl.swift; sourceTree = "<group>"; };
+		FR_2BFEA8A4C9973CB960476289B7E93F84 /* LoginViewCtrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewCtrl.swift; sourceTree = "<group>"; };
 		FR_3E2F7189B23F1668D90084E4D1F54D11 /* SdkSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SdkSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FR_9C26A0EF5017514A01606640BDA0C125 /* KeyItemTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyItemTableCell.swift; sourceTree = "<group>"; };
-		FR_A5E3C1E57AA1DD03D467734CBFF03CDB /* AsyncAuth0Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncAuth0Client.swift; sourceTree = "<group>"; };
-		FR_A8529147BF167FC95516DCD4ACFB9DA5 /* Auth0PasswordIdentityProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth0PasswordIdentityProvider.swift; sourceTree = "<group>"; };
 		FR_C95B645FC13F161F8F214CBB3FCBD6BF /* SdkSample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SdkSample.entitlements; sourceTree = "<group>"; };
 		FR_D97841911AE60EC4FE70EA1A96BC63D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FR_EE6AEAA66D9A6A66BF4F6EC868EE6457 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -79,16 +91,8 @@
 				G_93161A8435C7084D01188861110EEDDD /* Products */,
 				8FA220219487AE0A6A32E399 /* Pods */,
 				A8C3E3C7F19BAA502E19BF21 /* Frameworks */,
+				82C834C2C6E380B6A9A6064D /* .swiftlint.yml */,
 			);
-			sourceTree = "<group>";
-		};
-		G_8677FDFF1CDD19321C2A5D3EBC25D40C /* Authenitcation */ = {
-			isa = PBXGroup;
-			children = (
-				FR_A5E3C1E57AA1DD03D467734CBFF03CDB /* AsyncAuth0Client.swift */,
-				FR_A8529147BF167FC95516DCD4ACFB9DA5 /* Auth0PasswordIdentityProvider.swift */,
-			);
-			path = Authenitcation;
 			sourceTree = "<group>";
 		};
 		G_93161A8435C7084D01188861110EEDDD /* Products */ = {
@@ -102,19 +106,27 @@
 		G_D73AD4CE2F73C0EFE8A0D87AC218BDC4 /* SdkSample */ = {
 			isa = PBXGroup;
 			children = (
+				9E5B4F84230D4A6400BE87EB /* Config.xcconfig */,
+				9E5B4F89230D78CA00BE87EB /* SdkSample.debug.xcconfig */,
+				9E5B4F8A230D794400BE87EB /* SdkSample.release.xcconfig */,
 				FR_FF0F434DD7F474EA1BA586E20B667586 /* AboutViewController.swift */,
 				FR_18B883DD27D70ADF591789D320766E89 /* AppDelegate.swift */,
 				FR_D97841911AE60EC4FE70EA1A96BC63D0 /* Assets.xcassets */,
 				FR_EE6AEAA66D9A6A66BF4F6EC868EE6457 /* Info.plist */,
 				FR_2B5526D977B1A100F91A8ADF0B2AC2A4 /* KeyChainViewController.swift */,
 				FR_9C26A0EF5017514A01606640BDA0C125 /* KeyItemTableCell.swift */,
-				VG_09CBD1252ED91E78E85F119CA3BAE947 /* LaunchScreen.storyboard */,
 				VG_065EB0347B63D39DF182FABCACE20D2E /* Main.storyboard */,
+				VG_09CBD1252ED91E78E85F119CA3BAE947 /* LaunchScreen.storyboard */,
 				FR_C95B645FC13F161F8F214CBB3FCBD6BF /* SdkSample.entitlements */,
-				FR_2BFEA8A4C9973CB960476289B7E93F84 /* SignInViewCtrl.swift */,
+				9E745FF5230D38F6000E6BE4 /* SampleServerManager.swift */,
+				9E5B4F87230D749C00BE87EB /* TapkeyTokenExchangeManager.swift */,
+				FR_2BFEA8A4C9973CB960476289B7E93F84 /* LoginViewCtrl.swift */,
+				9E5B4F85230D5B0B00BE87EB /* Environment.swift */,
 				FR_F1EFC099D57C40E7E77B93F2770DC89F /* TabBarController.swift */,
 				F5FB9F05221443E200F60099 /* third_party_licenses.txt */,
-				G_8677FDFF1CDD19321C2A5D3EBC25D40C /* Authenitcation */,
+				9E5B4F8B230D9A2000BE87EB /* SampleTokenRefreshHandler.swift */,
+				9E5B4F8D230DA0BD00BE87EB /* SampleAuthStateManager.swift */,
+				9E5B4F8F230E760C00BE87EB /* ApplicationGrant.swift */,
 			);
 			path = SdkSample;
 			sourceTree = "<group>";
@@ -242,16 +254,20 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-SdkSample/Pods-SdkSample-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Auth0/Auth0.framework",
-				"${BUILT_PRODUCTS_DIR}/SimpleKeychain/SimpleKeychain.framework",
+				"${BUILT_PRODUCTS_DIR}/AppAuth/AppAuth.framework",
+				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxRelay/RxRelay.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SocketRocket/SocketRocket.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Auth0.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimpleKeychain.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AppAuth.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxRelay.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketRocket.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -266,14 +282,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E5B4F8C230D9A2000BE87EB /* SampleTokenRefreshHandler.swift in Sources */,
+				9E5B4F90230E760C00BE87EB /* ApplicationGrant.swift in Sources */,
 				BF_FF7BEC3C57CD5CB5A91DF0D5D53B685A /* AboutViewController.swift in Sources */,
+				9E5B4F86230D5B0B00BE87EB /* Environment.swift in Sources */,
 				BF_691B4299E895C8CE0398A60CCBD3DCB7 /* AppDelegate.swift in Sources */,
-				BF_5313E33A410514E0619F27AAC53CC758 /* AsyncAuth0Client.swift in Sources */,
-				BF_AF7907A1A1443CD3B1890CA65CB772CA /* Auth0PasswordIdentityProvider.swift in Sources */,
 				BF_7891612257AC0B69C19BB04B9E91BC7F /* KeyChainViewController.swift in Sources */,
+				9E745FF6230D38F6000E6BE4 /* SampleServerManager.swift in Sources */,
 				BF_328F840739F888EBF15860A0813A2CA5 /* KeyItemTableCell.swift in Sources */,
-				BF_0954CC5236EF042E6DE9577FDA26538A /* SignInViewCtrl.swift in Sources */,
+				BF_0954CC5236EF042E6DE9577FDA26538A /* LoginViewCtrl.swift in Sources */,
+				9E5B4F88230D749C00BE87EB /* TapkeyTokenExchangeManager.swift in Sources */,
 				BF_8F3B3BB67DFD9EBFC07B8A4210A588DB /* TabBarController.swift in Sources */,
+				9E5B4F8E230DA0BD00BE87EB /* SampleAuthStateManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,7 +321,7 @@
 /* Begin XCBuildConfiguration section */
 		BC_1DD1FA4DB3EA8529AD51B660022205B0 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8756376990EE410499AB75E1 /* Pods-SdkSample.debug.xcconfig */;
+			baseConfigurationReference = 9E5B4F89230D78CA00BE87EB /* SdkSample.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -312,7 +332,7 @@
 				INFOPLIST_FILE = SdkSample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.tpky.SDKSample;
-				PROVISIONING_PROFILE_SPECIFIER = "iOS Development Provisioning Profile";
+				PROVISIONING_PROFILE_SPECIFIER = "SDKSample iOS Development Provisioning Profile";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -321,7 +341,7 @@
 		};
 		BC_31E827655D571FFF8AC1420F5E6AC450 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3495A2AD311D6FE3E66B2E68 /* Pods-SdkSample.release.xcconfig */;
+			baseConfigurationReference = 9E5B4F8A230D794400BE87EB /* SdkSample.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;

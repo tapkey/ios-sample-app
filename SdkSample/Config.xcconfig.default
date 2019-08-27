@@ -1,0 +1,18 @@
+//
+// Rename this file to Config.xcconfig and fill in the missing values.
+//
+
+// Tapkey Authorization Server
+TAPKEY_AUTHORIZATION_SERVER_SCHEME = https
+TAPKEY_AUTHORIZATION_SERVER_AUTHORITY = login.tapkey.com
+
+// The Token Exchange OAuth client's ID
+TAPKEY_OAUTH_CLIENT_ID =
+
+// The identity provider's ID
+TAPKEY_IDENTITY_PROVIDER_ID =
+
+// Sample Server
+SAMPLE_BACKEND_SCHEME = https
+SAMPLE_BACKEND_HOST = token-exchange-server-sample.azurewebsites.net
+SAMPLE_BACKEND_PORT =
