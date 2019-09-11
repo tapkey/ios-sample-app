@@ -94,7 +94,6 @@ class KeyChainViewController: UITableViewController {
 
         self.keyManager!.queryLocalKeysAsync(
                         userId: userId,
-                        forceUpdate: false,
                         cancellationToken: TKMCancellationTokens.None)
             .continueOnUi { keyDetails in
 
@@ -118,8 +117,8 @@ class KeyChainViewController: UITableViewController {
                             self.refreshView()
                         })
 
-            }.catchOnUi { (error: NSException?) in
-                NSLog("Query local keys failed. \(String(describing: error?.reason))")
+            }.catchOnUi { (error: TKMAsyncError) in
+                NSLog("Query local keys failed. \(String(describing: error))")
                 self.listItems = []
                 self.refreshView()
                 return nil
@@ -211,7 +210,7 @@ class KeyChainViewController: UITableViewController {
                     return false
                 }
             })
-            .catchOnUi({ (_: NSException?) -> Bool in
+            .catchOnUi({ (_: TKMAsyncError) -> Bool in
                 NSLog("Trigger lock failed")
                 return false
             })

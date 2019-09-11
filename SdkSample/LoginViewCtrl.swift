@@ -121,7 +121,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     observer.on(.next(tapkeyUserId))
                 }
                 .catchOnUi { (error) -> Void in
-                    print(error ?? LoginError.sdkLoginFailed)
+                    print(error)
                     observer.on(.error(LoginError.sdkLoginFailed))
                     return
                 }
@@ -146,7 +146,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     observer.on(.next(Void()))
                 }
                 .catchOnUi { (error) -> Void in
-                    print(error ?? LoginError.sdkNotificationFetchFailed)
+                    print(error)
                     observer.on(.error(LoginError.sdkNotificationFetchFailed))
                     return
                 }

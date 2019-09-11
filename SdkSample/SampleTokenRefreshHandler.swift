@@ -17,7 +17,7 @@ class SampleTokenRefreshHandler: TKMTokenRefreshHandler {
         let promiseSource = TKMPromiseSource<String>()
 
         guard SampleAuthStateManager.isLoggedIn() else {
-            promiseSource.setException(TKMException(descriptor: TKMErrorDescriptor(
+            promiseSource.setError(TKMError(errorDescriptor: TKMErrorDescriptor(
                 code: TKMAuthenticationHandlerErrorCodes.TokenRefreshFailed,
                 message: "No new token can be obtained.",
                 details: nil)))
@@ -35,7 +35,7 @@ class SampleTokenRefreshHandler: TKMTokenRefreshHandler {
                 promiseSource.setResult(value)
             }, onError: { (error) in
                 print(error)
-                promiseSource.setException(JavaLangException(nsString: "Re-authentication failed."))
+                promiseSource.setError(TKMRuntimeError.unknownError("Re-authentication failed."))
             })
 
         return promiseSource.promise
