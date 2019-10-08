@@ -59,8 +59,9 @@ class KeyItemTableCell: UITableViewCell {
                     self.wrapperView.backgroundColor = .red
                 }
             })
-            .catchOnUi({ (_: NSException?) in
+            .catchOnUi({ (_: TKMAsyncError) in
                 self.wrapperView.backgroundColor = .red
+                return nil
             })
             .finallyOnUi {
                 // Reset progress indication
@@ -69,7 +70,7 @@ class KeyItemTableCell: UITableViewCell {
                 self.button.isHidden = false
 
                 // Reset background color after delay
-                TKObjcAsync.delay(withLong: 2000)
+                TKMAsync.delayAsync(delayMs: 2000)
                     .continueOnUi({ (_: Void?) -> Void? in
                         self.wrapperView.backgroundColor = .clear
                     }).conclude()
