@@ -41,6 +41,8 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+    <key>NSBluetoothAlwaysUsageDescription</key>
+    <string>Tapkey SDK Sample requires Bluetooth to interact with Tapkey products.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
