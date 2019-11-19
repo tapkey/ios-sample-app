@@ -1,5 +1,5 @@
 source 'https://github.com/tapkey/TapkeyCocoaPods'
-source 'https://github.com/CocoaPods/Specs.git'
+source 'https://cdn.cocoapods.org/'
 
 project 'SdkSample'
 platform :ios, '9.0'
