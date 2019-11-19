@@ -1,5 +1,5 @@
 source 'https://github.com/tapkey/TapkeyCocoaPods'
-source 'https://github.com/CocoaPods/Specs.git'
+source 'https://cdn.cocoapods.org/'
 
 project 'SdkSample'
 platform :ios, '9.0'
@@ -7,7 +7,7 @@ use_frameworks!
 
 target 'SdkSample' do
 
-    pod 'TapkeyMobileLib', '2.4.0.0'
+    pod 'TapkeyMobileLib', '2.5.10.0'
 
     pod 'RxSwift', '~> 5'
     pod 'RxCocoa', '~> 5'
