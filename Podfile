@@ -7,7 +7,7 @@ use_frameworks!
 
 target 'SdkSample' do
 
-    pod 'TapkeyMobileLib', '2.12.1.0'
+    pod 'TapkeyMobileLib', '2.12.7.0'
 
     pod 'RxSwift', '~> 5'
     pod 'RxCocoa', '~> 5'
