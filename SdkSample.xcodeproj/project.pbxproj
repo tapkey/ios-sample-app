@@ -230,7 +230,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-SdkSample/Pods-SdkSample-resources.sh",
-				"${PODS_ROOT}/TapkeyMobileLib/TapkeyMobileLib.framework/TapkeyMobileLib.bundle",
+				"${PODS_ROOT}/TapkeyMobileLib/TapkeyMobileLib.xcframework/ios-arm64_armv7/TapkeyMobileLib.framework/TapkeyMobileLib.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -321,6 +321,15 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = DHDN8M62VJ;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/AppAuth/AppAuth.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RxCocoa/RxCocoa.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RxRelay/RxRelay.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RxSwift/RxSwift.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SocketRocket/SocketRocket.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/TapkeyMobileLib/TapkeyMobileLibContainer.framework/Headers\"",
+				);
 				INFOPLIST_FILE = SdkSample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.tpky.SDKSample;
@@ -341,6 +350,15 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = DHDN8M62VJ;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/AppAuth/AppAuth.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RxCocoa/RxCocoa.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RxRelay/RxRelay.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RxSwift/RxSwift.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SocketRocket/SocketRocket.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/TapkeyMobileLib/TapkeyMobileLibContainer.framework/Headers\"",
+				);
 				INFOPLIST_FILE = SdkSample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.tpky.SDKSample;
