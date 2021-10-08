@@ -185,18 +185,21 @@ class KeyChainViewController: UITableViewController {
             return TKMAsync.promiseFromResult(false)
         }
 
+        let ct = TKMCancellationTokens.fromTimeout(timeoutMs: 15000)
+
         // Use the BLE lock communicator to send a command to the lock
         return self.bleLockCommunicator.executeCommandAsync(
                         bluetoothAddress: bluetoothAddress,
                         physicalLockId: physicalLockId,
-                        commandFunc: { tlcpConnection in
+                        commandFunc: { tlcpConnection -> TKMPromise<TKMCommandResult> in
+
+                            let triggerLockCommand = TKMDefaultTriggerLockCommandBuilder()
+                                .build()
+
                             // Pass the TLCP connection to the command execution facade
-                            self.commandExecutionFacade!.triggerLockAsync(
-                                    tlcpConnection,
-                                    cancellationToken: TKMCancellationTokens.None
-                            )
+                            return self.commandExecutionFacade!.executeStandardCommandAsync(tlcpConnection, command: triggerLockCommand, cancellationToken: ct)
                         },
-                        cancellationToken: TKMCancellationTokens.None)
+                        cancellationToken: ct)
 
             // Process the command's result
             .continueOnUi({ commandResult in

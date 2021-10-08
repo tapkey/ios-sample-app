@@ -11,6 +11,7 @@ mechanisms and therefore requires a sample web service in order to work. This
 sample service is available at [tapkey/tapkey-api-samples-java/token-exchange-server-sample](https://github.com/tapkey/tapkey-api-samples-java/tree/master/token-exchange-server-sample).
 
 1. Copy `Config.xcconfig.default` to `Config.xcconfig` and edit appropriately.
-2. Install Pods
-3. Build and run with Xcode.
+2. Install ruby build dependencies with `bundle install`
+3. Install Pods with `bundle exec pod install`
+4. Build and run with Xcode 13 or later.
  
